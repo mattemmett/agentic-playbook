@@ -554,3 +554,445 @@ By designing for evolution upfront, agentic systems remain coherent even as they
 
 ---
 
+## 8. Experiments and Validation
+
+Agentic development requires experimentation. New models, tools, and patterns appear continuously, and many claims cannot be evaluated purely through reasoning.
+
+This playbook treats experimentation as a **disciplined activity**, not an ad-hoc one. Experiments exist to reduce uncertainty—not to bypass principles, destabilize systems, or prematurely enshrine new ideas.
+
+---
+
+### 8.1 Experiments Are Not Production Patterns
+
+An experiment is a controlled test of an idea under constrained conditions.
+
+Experiments:
+- explore hypotheses,
+- accept limited risk,
+- and generate evidence.
+
+They do **not** define best practices, defaults, or long-term architecture.
+
+This playbook draws a clear boundary between:
+- **experiments**, which are provisional,
+- and **practices**, which are promoted deliberately.
+
+Blurring this boundary leads to fragile systems built on unvalidated assumptions.
+
+---
+
+### 8.2 Defining a Valid Experiment
+
+A valid experiment has:
+- a clear hypothesis,
+- a defined scope,
+- explicit success and failure criteria,
+- and a limited blast radius.
+
+Experiments should be designed so that failure is informative rather than disruptive. If an experiment cannot fail safely, it is not ready to be run.
+
+---
+
+### 8.3 Isolation and Containment
+
+Experiments should be isolated from core systems whenever possible.
+
+Isolation may include:
+- separate environments,
+- constrained execution surfaces,
+- reduced permissions,
+- or synthetic data.
+
+Containment ensures that exploratory work does not leak unintended behavior into stable workflows or execution paths.
+
+---
+
+### 8.4 Evidence Over Intuition
+
+Agentic systems are persuasive. They often *sound* correct even when they are wrong.
+
+This playbook favors:
+- observed behavior over plausible reasoning,
+- measured outcomes over anecdotal success,
+- and repeatability over novelty.
+
+An experiment that produces convincing explanations but inconsistent results is treated as a failure, not a success.
+
+---
+
+### 8.5 Promotion Criteria
+
+Not all experiments deserve promotion.
+
+Before an experimental idea becomes part of the playbook or reusable templates, it should demonstrate:
+- consistent behavior across contexts,
+- alignment with core principles,
+- manageable risk characteristics,
+- and clear benefits relative to existing approaches.
+
+Promotion is an explicit decision, not a gradual drift.
+
+---
+
+### 8.6 Recording Results and Outcomes
+
+An experiment that is not recorded may as well not have happened.
+
+Experiment records should capture:
+- the original hypothesis,
+- the setup and constraints,
+- the observed outcomes,
+- and the resulting decision.
+
+This prevents repeated exploration of dead ends and allows future readers to understand why certain paths were pursued—or abandoned.
+
+---
+
+### 8.7 Experiments as Inputs to Evolution
+
+Experiments inform evolution; they do not dictate it.
+
+Evidence gathered through experimentation feeds into:
+- decision records,
+- updates to principles or practices,
+- and refinement of execution and governance models.
+
+This ensures that learning strengthens the system rather than fragmenting it.
+
+---
+
+### 8.8 Experimentation as a Continuous Capability
+
+Experimentation is not a phase that ends.
+
+As agentic systems mature:
+- new uncertainties emerge,
+- new risks appear,
+- and new opportunities arise.
+
+By treating experimentation as a continuous capability—bounded, intentional, and well-governed—agentic development remains adaptive without becoming unstable.
+
+---
+
+## 9. Reusable Patterns and Templates
+
+Principles and models only create leverage when they can be applied repeatedly. This playbook treats reuse not as copy-and-paste convenience, but as a mechanism for **propagating correctness, safety, and intent** across systems.
+
+Reusable patterns and templates translate doctrine into practice while preserving the ability to adapt to local context.
+
+---
+
+### 9.1 Patterns Capture Intent, Not Implementation
+
+A pattern describes a recurring solution to a class of problems. It does not prescribe exact tooling, syntax, or structure.
+
+Effective agentic patterns:
+- express intent clearly,
+- define boundaries and responsibilities,
+- and highlight tradeoffs.
+
+Patterns should answer the question:
+> “What problem does this solve, and under what assumptions?”
+
+They should *not* attempt to be exhaustive or universal.
+
+---
+
+### 9.2 Templates Are Starting Points, Not End States
+
+Templates provide concrete instantiations of patterns.
+
+They exist to:
+- reduce setup cost,
+- encode known-good defaults,
+- and make abstract ideas tangible.
+
+Templates are expected to be modified. Treating them as fixed artifacts leads to stagnation and misuse.
+
+This playbook assumes that templates will diverge over time as they are adapted to different contexts.
+
+---
+
+### 9.3 Clear Separation of Concerns
+
+Reusable artifacts should preserve the separations defined earlier in this playbook.
+
+Common template boundaries include:
+- agent definition vs execution surface,
+- reasoning context vs system knowledge,
+- workflows vs safety controls,
+- experiments vs production paths.
+
+Blurring these concerns in templates undermines the very discipline the playbook promotes.
+
+---
+
+### 9.4 Explicit Scope and Preconditions
+
+Every reusable artifact should declare:
+- what it is intended for,
+- what assumptions it makes,
+- and what prerequisites it requires.
+
+This prevents inappropriate reuse and makes limitations visible.
+
+A template without declared scope is likely to be misapplied.
+
+---
+
+### 9.5 Evolution of Patterns Over Time
+
+Patterns are not immutable.
+
+As systems evolve:
+- new failure modes appear,
+- old constraints disappear,
+- and better abstractions emerge.
+
+This playbook treats pattern evolution as normal and healthy. Changes to patterns should be intentional and accompanied by rationale, not silent drift.
+
+Deprecated patterns should be marked explicitly, not quietly abandoned.
+
+---
+
+### 9.6 Avoiding Cargo-Cult Adoption
+
+Reusable artifacts are powerful—and dangerous.
+
+When patterns or templates are adopted without understanding:
+- constraints are bypassed,
+- assumptions are violated,
+- and failures become opaque.
+
+This playbook assumes that reuse is accompanied by education. Patterns are meant to accelerate understanding, not replace it.
+
+---
+
+### 9.7 Reuse as Organizational Memory
+
+Over time, a collection of patterns and templates becomes a form of organizational memory.
+
+They encode:
+- what has worked,
+- what has failed,
+- and what tradeoffs have been accepted.
+
+In agentic systems—where behavior can outlive individual contributors—this memory is essential to maintaining coherence and trust.
+
+---
+
+## 10. Common Failure Modes and Anti-Patterns
+
+Agentic systems fail in predictable ways. These failures are rarely caused by model limitations alone; they almost always stem from design shortcuts, implicit assumptions, or misplaced trust.
+
+This section documents common failure modes and anti-patterns observed in agentic development. Its purpose is not to assign blame, but to make risks legible before they manifest in production systems.
+
+---
+
+### 10.1 Implicit Context Accumulation
+
+When context is allowed to accumulate implicitly—through conversation history, undocumented assumptions, or copied prompts—systems become brittle and unpredictable.
+
+Symptoms include:
+- agents behaving differently across sessions,
+- regressions without clear cause,
+- and difficulty reproducing outcomes.
+
+This anti-pattern is addressed by treating context as an explicit, first-class artifact.
+
+---
+
+### 10.2 Prompt-Centric System Design
+
+Overloading prompts with rules, workflows, and safety logic places too much responsibility on inference.
+
+Prompt-centric systems:
+- are hard to audit,
+- fail silently,
+- and degrade as complexity increases.
+
+Prompts are an interface to reasoning, not a substitute for system design.
+
+---
+
+### 10.3 Execution Invention
+
+Allowing agents to invent commands, scripts, or execution steps dynamically is a high-risk anti-pattern.
+
+This often leads to:
+- unintended side effects,
+- privilege escalation,
+- environment-specific failures,
+- and unreviewable behavior.
+
+Execution logic belongs in human-owned, stable execution surfaces—not in agent reasoning.
+
+---
+
+### 10.4 False Autonomy
+
+Granting autonomy before boundaries are clear creates an illusion of capability.
+
+False autonomy manifests as:
+- agents that appear competent but fail under edge cases,
+- systems that require constant manual cleanup,
+- and loss of trust from operators.
+
+Autonomy should be earned through design, not assumed by default.
+
+---
+
+### 10.5 Conflating Experiments With Practices
+
+Experimental success does not imply production readiness.
+
+When experiments are promoted implicitly:
+- unvalidated assumptions become defaults,
+- temporary workarounds harden into architecture,
+- and failures are rationalized rather than addressed.
+
+Promotion from experiment to practice must be explicit and evidence-based.
+
+---
+
+### 10.6 Human-in-the-Loop as a Crutch
+
+Requiring constant human intervention to compensate for poor system design is an anti-pattern.
+
+While human oversight is sometimes necessary, systems that rely on it continuously:
+- do not scale,
+- obscure root causes,
+- and shift risk onto individuals.
+
+Human involvement should complement good design, not compensate for its absence.
+
+---
+
+### 10.7 Overgeneralization From Success
+
+Early successes are often narrow and context-dependent.
+
+Overgeneralization occurs when:
+- limited wins are extrapolated broadly,
+- constraints are relaxed prematurely,
+- or complexity is underestimated.
+
+This playbook emphasizes incremental expansion and explicit validation to avoid this trap.
+
+---
+
+### 10.8 Invisible Decision-Making
+
+When decisions are embedded implicitly in code, prompts, or agent behavior, they become difficult to revisit.
+
+Invisible decisions lead to:
+- institutional amnesia,
+- repeated mistakes,
+- and resistance to change.
+
+Recording decisions and rationale prevents this failure mode.
+
+---
+
+### 10.9 Treating Safety as Policy Instead of Design
+
+Safety mechanisms implemented only as external policies or procedural checks are fragile.
+
+Without structural enforcement:
+- policies are bypassed under pressure,
+- compliance becomes performative,
+- and failures surprise stakeholders.
+
+Safety must be embedded into workflows and execution surfaces to be effective.
+
+---
+
+### 10.10 Chasing Novelty Over Stability
+
+Agentic development evolves rapidly, but constant adoption of new tools or techniques introduces instability.
+
+Novelty-driven systems:
+- lack coherence,
+- resist standardization,
+- and exhaust teams.
+
+This playbook prioritizes durable patterns and deliberate change over perpetual reinvention.
+
+---
+
+## 11. Status and Future Directions
+
+This playbook represents a snapshot of current understanding, not a finished theory.
+
+Agentic development is evolving rapidly. Models improve, tooling changes, and organizational practices adapt. Some assumptions captured here will age well; others will require revision. This is expected.
+
+What matters is not that every detail remains correct, but that the **method of reasoning, evaluation, and evolution remains sound**.
+
+---
+
+### 11.1 What This Playbook Is
+
+This playbook is:
+- a structured articulation of hard-earned insights,
+- a set of design constraints that favor safety and clarity,
+- and a framework for reasoning about agentic systems at scale.
+
+It is intentionally opinionated. Its value comes from drawing boundaries, naming tradeoffs, and resisting vague optimism.
+
+---
+
+### 11.2 What This Playbook Is Not
+
+This playbook is not:
+- a universal prescription,
+- a catalog of tools,
+- or a guarantee of success.
+
+It does not attempt to predict which models or platforms will dominate. It focuses instead on **design choices that remain relevant across technological shifts**.
+
+---
+
+### 11.3 Incorporating New Research and Techniques
+
+New research, tools, and patterns should be evaluated against the principles outlined here.
+
+Questions to ask include:
+- Does this reduce or increase implicit context?
+- Does it strengthen or weaken execution boundaries?
+- Does it clarify or obscure accountability?
+- Does it make failure modes more visible or less?
+
+Novelty alone is not sufficient justification for adoption.
+
+---
+
+### 11.4 Revising the Playbook
+
+Changes to this playbook should be:
+- intentional,
+- documented with rationale,
+- and traceable over time.
+
+Disagreement is expected. Revisions are a sign of learning, not failure.
+
+The goal is not consensus, but coherence.
+
+---
+
+### 11.5 Looking Forward
+
+As agentic systems move closer to core business functions, the need for disciplined design will only increase.
+
+The practices described here are meant to scale with:
+- system complexity,
+- organizational size,
+- and risk tolerance.
+
+This playbook will evolve alongside that reality.
+
+What should remain constant is the commitment to:
+- explicit design,
+- bounded autonomy,
+- and responsible evolution.
+
+That commitment—not any specific tool or technique—is the foundation of sustainable agentic development.
