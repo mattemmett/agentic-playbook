@@ -188,3 +188,369 @@ As agentic systems grow:
 - and artifacts must be reclassified.
 
 This playbook treats context engineering as a continuous responsibility—one that is essential to maintaining safe, reliable, and intelligible agentic systems over time.
+
+---
+
+## 5. Workflows and Execution
+
+Agentic systems only become real when reasoning turns into action. How that transition is designed is one of the most consequential choices in agentic development.
+
+This playbook treats **execution as a governed system**, not an incidental outcome of reasoning. Reasoning may be flexible and exploratory; execution must be bounded, explicit, and reliable.
+
+---
+
+### 5.1 Reasoning Does Not Equal Execution
+
+A core distinction in this model is that *reasoning* and *execution* are not the same activity.
+
+Agents may:
+- reason broadly,
+- explore alternatives,
+- propose plans,
+- and evaluate tradeoffs.
+
+Execution, however:
+- changes system state,
+- produces side effects,
+- and carries real risk.
+
+Conflating these phases—allowing agents to reason *and* directly execute without mediation—creates brittle systems that are difficult to audit, debug, or trust.
+
+This playbook assumes that **execution is always mediated**.
+
+---
+
+### 5.2 Explicit Workflows as the Bridge
+
+Workflows provide the bridge between reasoning and execution.
+
+A workflow is an explicit, structured sequence that:
+- defines the steps required to accomplish an outcome,
+- encodes validation and safety checks,
+- and constrains how actions are performed.
+
+Rather than allowing agents to compose arbitrary actions, workflows present a **finite set of known paths** from intent to effect. Agents choose among these paths; they do not invent them.
+
+This distinction preserves flexibility while maintaining control.
+
+---
+
+### 5.3 Stable Execution Surfaces
+
+Execution should occur through **stable, human-owned execution surfaces**.
+
+A good execution surface has the following properties:
+- **Enumerated** — the set of possible actions is finite and named.
+- **Explicit** — inputs, effects, and failure modes are clear.
+- **Stable** — interfaces change deliberately, not accidentally.
+- **Verifiable** — execution reports what it is doing and whether it succeeded.
+- **Bounded** — actions cannot exceed their intended scope.
+
+These surfaces may take many forms:
+- task runners,
+- command abstractions,
+- internal APIs,
+- job orchestration systems.
+
+Task runners such as **Make** are one common way to implement this pattern, as they expose a small, explicit set of human-defined actions while remaining decoupled from agent reasoning. The specific mechanism is less important than the constraint it enforces: **agents select actions; they do not synthesize execution logic**.
+
+---
+
+### 5.4 Human Ownership and Accountability
+
+Execution surfaces are defined and owned by humans.
+
+Humans decide:
+- what actions exist,
+- what they do,
+- what safeguards they enforce,
+- and under what conditions they may be invoked.
+
+Agents operate *within* this surface, not above it.
+
+This preserves accountability and makes responsibility legible. When something goes wrong, it is possible to answer not only *what happened*, but *why the system allowed it to happen*.
+
+---
+
+### 5.5 Safety, Idempotence, and Verification
+
+Well-designed execution workflows incorporate safety by default.
+
+Common safety properties include:
+- explicit confirmation for destructive actions,
+- idempotent operations where possible,
+- precondition checks,
+- and post-execution verification.
+
+These mechanisms should live in the execution surface itself, not in agent reasoning. This ensures that safety does not depend on correct inference or perfect prompt behavior.
+
+---
+
+### 5.6 Why Agents Should Not Invent Commands
+
+Allowing agents to invent execution steps dynamically introduces several failure modes:
+- implicit assumptions about system state,
+- accidental escalation of privileges,
+- brittle coupling to environment details,
+- and silent drift in operational behavior.
+
+This playbook treats **execution invention as an anti-pattern**.
+
+Agents may propose *what* should be done. Humans define *how* it can be done safely.
+
+---
+
+### 5.7 Execution as a Design Constraint
+
+Treating execution as a constrained design surface may initially feel limiting. In practice, it enables scale.
+
+As systems grow:
+- workflows become reusable,
+- execution surfaces become shared contracts,
+- and agent behavior becomes more predictable.
+
+This approach trades unconstrained autonomy for **composability, safety, and trust**—a trade that becomes increasingly favorable as agentic systems move closer to production environments.
+
+Execution is not where creativity lives. It is where reliability is earned.
+
+---
+
+## 6. Safety, Control, and Governance
+
+As agentic systems gain the ability to act, safety and control move from secondary concerns to foundational design requirements.
+
+This playbook treats safety not as a bolt-on feature or a policy layer, but as an **emergent property of good system design**. Control and governance are achieved through explicit boundaries, clear ownership, and intentional constraints—not through constant supervision or brittle rules.
+
+---
+
+### 6.1 Safety Is a Systems Property
+
+In agentic development, failures rarely originate from a single bad decision. They emerge from interactions between reasoning, context, workflows, and execution surfaces.
+
+This playbook assumes that:
+- safety cannot rely on perfect reasoning,
+- guardrails cannot live solely in prompts,
+- and risk cannot be managed through trust alone.
+
+Instead, safety must be distributed across the system:
+- in how context is structured,
+- in how workflows are defined,
+- and in how execution is constrained.
+
+---
+
+### 6.2 Human-in-the-Loop Is a Design Choice
+
+Human involvement in agentic systems is not binary. It exists on a spectrum.
+
+Humans may:
+- define intent and goals,
+- approve high-risk actions,
+- review proposed plans,
+- or audit outcomes after execution.
+
+The appropriate level of human involvement depends on:
+- the reversibility of actions,
+- the blast radius of failure,
+- the maturity of the system,
+- and organizational risk tolerance.
+
+This playbook treats **human-in-the-loop** not as a default requirement, but as an explicit design decision that should be revisited as systems evolve.
+
+---
+
+### 6.3 Guardrails Over Gatekeepers
+
+Effective governance favors **guardrails** over constant gatekeeping.
+
+Guardrails:
+- constrain what is possible,
+- enforce invariants automatically,
+- and fail fast when boundaries are crossed.
+
+Gatekeeping:
+- slows systems unnecessarily,
+- obscures responsibility,
+- and often collapses under scale.
+
+By embedding constraints into execution surfaces and workflows, agentic systems can operate autonomously *within* safe bounds, without requiring continuous human approval for low-risk actions.
+
+---
+
+### 6.4 Explicit Risk Boundaries
+
+Not all actions carry equal risk.
+
+This playbook encourages systems to distinguish clearly between:
+- reversible vs irreversible actions,
+- local vs global effects,
+- informational vs state-changing operations.
+
+High-risk actions should require:
+- stronger validation,
+- explicit confirmation,
+- or elevated authorization.
+
+Low-risk actions should be allowed to proceed with minimal friction.
+
+Treating all actions as equally dangerous leads either to over-restriction or to normalization of risk. Explicit risk boundaries avoid both.
+
+---
+
+### 6.5 Observability and Auditability
+
+Trust in agentic systems is built through visibility.
+
+Well-governed systems make it possible to answer:
+- what action was taken,
+- when it was taken,
+- under what context,
+- and through which execution surface.
+
+This does not require exhaustive logging of reasoning chains. It requires **clear records of decisions and effects**.
+
+Auditability enables:
+- post-incident analysis,
+- continuous improvement,
+- and organizational confidence in autonomous behavior.
+
+---
+
+### 6.6 Governance Evolves With the System
+
+Governance is not static.
+
+As agentic systems mature:
+- confidence may increase,
+- constraints may loosen,
+- and automation may expand.
+
+Conversely, incidents may justify:
+- tighter boundaries,
+- additional checks,
+- or reduced autonomy.
+
+This playbook assumes that governance mechanisms will change over time and emphasizes the importance of making those changes **explicit, intentional, and reviewable**.
+
+---
+
+### 6.7 Safety as an Enabler, Not a Limitation
+
+When designed well, safety and control do not reduce capability. They enable it.
+
+Clear boundaries:
+- allow agents to act confidently,
+- reduce fear of unintended consequences,
+- and make autonomy scalable.
+
+Safety is not the opposite of speed.  
+It is the foundation that allows speed to exist without fragility.
+
+---
+
+## 7. Decision-Making and Evolution
+
+Agentic systems operate in environments that change faster than any static design can accommodate. New tools emerge, assumptions break, and organizational priorities shift.
+
+This playbook assumes that **change is inevitable**. The question is not whether systems will evolve, but whether that evolution is intentional, traceable, and coherent.
+
+---
+
+### 7.1 Decisions Are First-Class Artifacts
+
+In complex systems, undocumented decisions quickly become invisible constraints.
+
+This playbook treats significant decisions as first-class artifacts that deserve:
+- explicit articulation,
+- recorded rationale,
+- and clear ownership.
+
+Decisions are not embedded implicitly in code, prompts, or workflows. They are documented separately so they can be examined, challenged, and revised over time.
+
+---
+
+### 7.2 Separating Principles From Decisions
+
+Not all beliefs have the same durability.
+
+This playbook distinguishes between:
+- **principles**, which change slowly and define invariants,
+- **decisions**, which apply principles to specific contexts,
+- and **implementations**, which realize decisions in concrete systems.
+
+Confusing these layers leads either to rigidity (when decisions are mistaken for principles) or instability (when principles are treated as disposable).
+
+Clear separation allows systems to evolve without undermining their foundations.
+
+---
+
+### 7.3 Recording Rationale, Not Just Outcomes
+
+A decision without rationale is indistinguishable from an accident.
+
+Effective decision records capture:
+- the context in which the decision was made,
+- the alternatives that were considered,
+- the tradeoffs that were accepted,
+- and the expected consequences.
+
+This makes it possible to understand not only *what* was decided, but *why* it made sense at the time.
+
+---
+
+### 7.4 Revisiting Assumptions Explicitly
+
+Assumptions decay.
+
+Changes in scale, tooling, risk tolerance, or organizational structure can invalidate previously sound decisions. When assumptions are implicit, this decay is hard to detect.
+
+This playbook encourages periodic reassessment of:
+- core assumptions,
+- execution constraints,
+- and governance boundaries.
+
+Revisiting assumptions is not a failure. It is evidence of system maturity.
+
+---
+
+### 7.5 Evolving Without Thrashing
+
+Uncontrolled change is as dangerous as stagnation.
+
+Well-governed evolution favors:
+- small, reversible changes,
+- isolated experiments,
+- and clear promotion criteria.
+
+Large, sweeping changes are rare and intentional. Most evolution occurs incrementally, guided by evidence rather than enthusiasm.
+
+This approach reduces disruption while preserving adaptability.
+
+---
+
+### 7.6 Decision Records as an Interface to the Future
+
+Decision records serve an important secondary purpose: they communicate intent to future humans and systems.
+
+They allow future readers to:
+- understand historical context,
+- avoid repeating past mistakes,
+- and assess whether conditions have changed enough to justify a new approach.
+
+In this sense, decision records are a form of **institutional memory**—critical in systems where agents may operate longer than individual contributors remain involved.
+
+---
+
+### 7.7 Evolution as a Design Constraint
+
+Just as execution and safety are designed explicitly, so too is evolution.
+
+This playbook assumes that:
+- systems will be revisited,
+- beliefs will be challenged,
+- and practices will change.
+
+By designing for evolution upfront, agentic systems remain coherent even as they adapt. Change becomes something the system supports, rather than something it resists or absorbs chaotically.
+
+---
+
